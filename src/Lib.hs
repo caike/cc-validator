@@ -12,9 +12,14 @@ import           Data.Function                  ( (&) )
 -- a credit card number is valid
 isValidCard :: [Int] -> Bool
 isValidCard (reverse -> (x:y)) = total `mod` 10 == 0
-  where total = multiplyInOddPositions y & subtract' & sum & (+ x)
+  where total = performCalculation x y
 isValidCard []      = False
 isValidCard (_ : _) = False
+
+-- performCalculation runs the logic for calculating
+-- a value according to business logic rules
+performCalculation :: Int -> [Int] -> Int
+performCalculation x y = multiplyInOddPositions y & subtract' & sum & (+ x)
 
 -- multiplyInOddPositions multiplies every other
 -- element by 2, starting with the first
