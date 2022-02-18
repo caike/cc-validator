@@ -1,6 +1,6 @@
 # Credit Card Validator Function
 
-Validates credit card according to a few predefined rules.
+Validates credit card numbers
 
 This project uses Stack - https://docs.haskellstack.org/en/stable/GUIDE/
 
