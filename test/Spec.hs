@@ -18,7 +18,7 @@ main = hspec $ do
       isValidCard invalidCardNumber1 `shouldBe` False
       isValidCard invalidCardNumber2 `shouldBe` False
       isValidCard invalidCardNumber3 `shouldBe` False
-      isValidCard invalidCardNumber4 `shouldBe` True
+      isValidCard invalidCardNumber4 `shouldBe` False
 
 type CreditCardNumber = [Int]
 
