@@ -19,13 +19,25 @@ jobs:
           enable-stack: true
           stack-version: '2.7.3'
 
-      - name: Cache
+      - name: Cache Cabal
         uses: actions/cache@v1
         env:
           cache-name: cache-cabal
         with:
           path: ~/.cabal
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('**/cabal.project') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Cache Stack
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-stack
+        with:
+          path: ~/.stack
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.stack') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
