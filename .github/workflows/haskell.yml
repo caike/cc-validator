@@ -22,24 +22,24 @@ jobs:
       - name: Cache Cabal
         uses: actions/cache@v1
         env:
-          cache-name: cache-cabal
+          cache1-name: cache-cabal
         with:
           path: ~/.cabal
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('**/cabal.project') }}
+          key: ${{ runner.os }}-build-${{ env.cache1-name }}-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('**/cabal.project') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-${{ env.cache1-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
       - name: Cache Stack
         uses: actions/cache@v1
         env:
-          cache-name: cache-stack
+          cache2-name: cache-stack
         with:
           path: ~/.stack
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.stack') }}
+          key: ${{ runner.os }}-build-${{ env.cache2-name }}-${{ hashFiles('**/*.stack') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-${{ env.cache2-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
