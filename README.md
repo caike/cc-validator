@@ -7,3 +7,4 @@ This project uses Stack - https://docs.haskellstack.org/en/stable/GUIDE/
 ## Run tests
 
 `stack test`
+

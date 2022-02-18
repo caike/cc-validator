@@ -1,0 +1,47 @@
+name: Haskell CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  runhaskell:
+    name: cc-validator
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: haskell/actions/setup@v1
+        with:
+          ghc-version: '8.10.7'
+          # cabal-version: 'latest'. Omitted, but defaults to 'latest'
+          enable-stack: true
+          stack-version: '2.7.3'
+
+      - name: Cache Cabal
+        uses: actions/cache@v1
+        env:
+          cache1-name: cache-cabal
+        with:
+          path: ~/.cabal
+          key: ${{ runner.os }}-build-${{ env.cache1-name }}-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('**/cabal.project') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache1-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Cache Stack
+        uses: actions/cache@v1
+        env:
+          cache2-name: cache-stack
+        with:
+          path: ~/.stack
+          key: ${{ runner.os }}-build-${{ env.cache2-name }}-${{ hashFiles('**/*.stack') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache2-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Run tests
+        run: stack test
