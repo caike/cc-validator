@@ -1,5 +1,3 @@
-{-# LANGUAGE ViewPatterns #-}
-
 module Lib
   ( isValidCard
   ) where
@@ -8,10 +6,10 @@ import           Data.Function                  ( (&) )
 -- isValidCard returns whether 
 -- a credit card number is valid
 isValidCard :: [Int] -> Bool
-isValidCard (reverse -> (x:y)) = total `mod` 10 == 0
-  where total = performCalculation x y
-isValidCard []      = False
-isValidCard (_ : _) = False
+isValidCard xs = total `mod` 10 == 0
+ where
+  (x : y) = reverse xs
+  total   = performCalculation x y
 
 -- performCalculation runs the logic for calculating
 -- a value according to business logic rules
