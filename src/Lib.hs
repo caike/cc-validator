@@ -2,9 +2,6 @@
 
 module Lib
   ( isValidCard
-  , multiplyInOddPositions
-  , subtract'
-  , someFunc
   ) where
 import           Data.Function                  ( (&) )
 
@@ -33,7 +30,3 @@ multiplyInOddPositions []  = []
 -- element higher than 9
 subtract' :: [Int] -> [Int]
 subtract' n = [ if x > 9 then x - 9 else x | x <- n ]
-
--- bleh
-someFunc :: IO ()
-someFunc = putStrLn "this is a test"
