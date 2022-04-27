@@ -1,7 +1,6 @@
 module Lib
   ( isValidCard
   ) where
-import           Data.Function                  ( (&) )
 
 -- isValidCard returns whether 
 -- a credit card number is valid
@@ -14,7 +13,12 @@ isValidCard xs = total `mod` 10 == 0
 -- performCalculation runs the logic for calculating
 -- a value according to business logic rules
 performCalculation :: Int -> [Int] -> Int
-performCalculation x y = multiplyInOddPositions y & subtract' & sum & (+ x)
+performCalculation x y =
+  let multResult = multiplyInOddPositions y
+      subResult  = subtract' multResult
+      sumResult  = sum subResult
+      addResult  = (+ x) sumResult
+  in  addResult
 
 -- multiplyInOddPositions multiplies every other
 -- element by 2, starting with the first
