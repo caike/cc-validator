@@ -17,8 +17,7 @@ performCalculation x y =
   let multResult = multiplyInOddPositions y
       subResult  = subtract' multResult
       sumResult  = sum subResult
-      addResult  = (+ x) sumResult
-  in  addResult
+  in sumResult + x
 
 -- multiplyInOddPositions multiplies every other
 -- element by 2, starting with the first
