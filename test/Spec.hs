@@ -1,4 +1,5 @@
-import           Lib                            ( isValidCard )
+import           Lib                            ( isValidCard
+                                                , isValidCardStr )
 import           Test.Hspec                     ( describe
                                                 , hspec
                                                 , it
@@ -7,7 +8,7 @@ import           Test.Hspec                     ( describe
 
 main :: IO ()
 main = hspec $ do
-  describe "isValidCard" $ do
+  describe "isValidCard as list of numbers" $ do
     it "should return True for a number that is valid" $ do
       isValidCard validCardNumber1 `shouldBe` True
       isValidCard validCardNumber2 `shouldBe` True
@@ -19,6 +20,16 @@ main = hspec $ do
       isValidCard invalidCardNumber2 `shouldBe` False
       isValidCard invalidCardNumber3 `shouldBe` False
       isValidCard invalidCardNumber4 `shouldBe` False
+
+  describe "isValidCardStr as a string" $ do
+    it "should return True for a string that is valid" $ do
+      isValidCardStr validCardNumber1Str `shouldBe` True
+      isValidCardStr validCardNumber2Str `shouldBe` True
+      isValidCardStr validCardNumber3Str `shouldBe` True
+      isValidCardStr validCardNumber4Str `shouldBe` True
+
+    it "should return False for a string that is invalid" $ do
+      isValidCardStr invalidCardNumberStr `shouldBe` False
 
 type CreditCardNumber = [Int]
 
@@ -48,3 +59,21 @@ validCardNumber4 = [4, 0, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 1]
 
 invalidCardNumber4 :: CreditCardNumber
 invalidCardNumber4 = map (+ 1) validCardNumber3
+
+-- Format expected by HTTP endpoint
+type CreditCardNumberStr = [Char]
+
+validCardNumber1Str :: CreditCardNumberStr
+validCardNumber1Str = "4556737586899855"
+
+validCardNumber2Str :: CreditCardNumberStr
+validCardNumber2Str = "5555555555554444"
+
+validCardNumber3Str :: CreditCardNumberStr
+validCardNumber3Str = "5105105105105100"
+
+validCardNumber4Str :: CreditCardNumberStr
+validCardNumber4Str = "4012888888881881"
+
+invalidCardNumberStr :: CreditCardNumberStr
+invalidCardNumberStr = "123"

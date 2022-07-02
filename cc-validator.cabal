@@ -42,6 +42,8 @@ executable cc-validator-exe
   build-depends:
       base >=4.7 && <5
     , cc-validator
+    , scotty
+    , text
   default-language: Haskell2010
 
 test-suite cc-validator-test

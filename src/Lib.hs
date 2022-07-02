@@ -1,6 +1,15 @@
 module Lib
   ( isValidCard
+   ,isValidCardStr
   ) where
+
+import Data.Char
+
+-- isValidCardStr is used by the HTTP endpoint.
+-- It expects a card number as a string and returns
+-- whether it is a valid or not
+isValidCardStr :: [Char] -> Bool
+isValidCardStr = isValidCard . convertToListOfNumbers
 
 -- isValidCard returns whether 
 -- a credit card number is valid
@@ -31,3 +40,7 @@ multiplyInOddPositions []  = []
 -- element higher than 9
 subtract' :: [Int] -> [Int]
 subtract' n = [ if x > 9 then x - 9 else x | x <- n ]
+
+convertToListOfNumbers :: [Char] -> [Int]
+convertToListOfNumbers xs =
+  map (\x -> read [x]::Int) (filter isDigit xs)
